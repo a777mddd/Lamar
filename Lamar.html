@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>لعبة الأسئلة 💗</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #ffc0cb, #ff69b4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fade 0.5s;
+}
+
+@keyframes fade {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 20px;
+    white-space: pre-line; /* 👈 هذا المهم */
+}
+
+.btn {
+    background: #ff4da6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #ff1a8c;
+    transform: scale(1.05);
+}
+
+.heart {
+    font-size: 40px;
+    animation: beat 1s infinite;
+}
+
+@keyframes beat {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.2);}
+    100% {transform: scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <div id="question" class="question"></div>
+    <div id="answers"></div>
+</div>
+
+<script>
+let step = 1;
+
+function render() {
+    const q = document.getElementById("question");
+    const a = document.getElementById("answers");
+    a.innerHTML = "";
+
+    if (step === 1) {
+        q.innerText = "انتي لمار ؟";
+        btn("اي", () => step = 2);
+        btn("لا", () => step = 1);
+    }
+
+    else if (step === 2) {
+        q.innerText = "هلا والله ابوي انا هلا بالقطوه لمار 😋";
+        btn("هلا والله", () => step = 3);
+    }
+
+    else if (step === 3) {
+        q.innerText = "عندي لك شي !!";
+        btn("هلا قول", () => step = 4);
+    }
+
+    else if (step === 4) {
+        q.innerText = "تحبين أحمد ؟ 🤨";
+        btn("ما ادري ليش ؟", () => step = 5);
+    }
+
+    else if (step === 5) {
+        q.innerText = "جاوبي بصراحه ولا اعض 😡😡";
+        btn("اي", () => step = 6);
+        btn("لا", () => step = 7);
+    }
+
+    else if (step === 7) {
+        q.innerText = "انقلعي برا الموقع يا قليلة الادب 😒";
+        btn("خلاص خلاص اسفه نبدي من جديد", () => step = 1);
+    }
+
+    else if (step === 6) {
+        q.innerText = `ادري الموضوع صار بسرعه ولا توقعت انني راح احبج بهالسرعه لاكن اتوقع انج تدرين من قبل انه اول ما عرفتج ما ادري شلون لاكن حبيتج وهذا شي ما اسويه العاده لاكن كانت كسر للعاده المهم انني احبج 😘  
+
+وزياده على هالكلام… والله يا لمار انتي صرتي شي كبير بحياتي بدون لا احس، صرت افكر فيج وايد واهتم لأدق تفاصيلج، واذا ضحكتي احس يومي كله صار احلى 🤍  
+وجودج بحياتي فرق معاي وايد، مو بس كإعجاب لا… كحب صادق من قلبي، واحس اني مرتاح وياج بطريقه ما حسّيتها قبل.  
+
+يمكن ما اعرف اوصف كل اللي بداخلي، بس اللي متأكد منه اني احبج وايد، وابي اكون معاج دايم، وابي اسعدج بكل طريقه اقدر عليها 💗  
+انتي مو شي عادي بالنسبه لي، انتي شي غالي علي وايد، واحس اني محظوظ اني عرفتج احبج 💗💗`;
+
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💗";
+        a.appendChild(heart);
+    }
+}
+
+function btn(text, action) {
+    const b = document.createElement("button");
+    b.className = "btn";
+    b.innerText = text;
+    b.onclick = () => {
+        action();
+        render();
+    };
+    document.getElementById("answers").appendChild(b);
+}
+
+render();
+</script>
+
+</body>
+</html>
